@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Payments</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Title -->
+<h1>User Payments</h1>
+
+<!-- Table -->
+<table id="paymentsTable" class="display">
+    <thead>
+        <tr>
+            <th>Payment ID</th>
+            <th>Amount ($)</th>
+            <th>Payment Date</th>
+            <th>Event Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const paymentData = [
+    {
+        "paymentID" : "P001",
+        "amount" : 15.00,
+        "paymentDate" : "2025-03-01 12:01:00",
+        "eventName" : "HC Hockey vs BU"
+    },
+    {
+        "paymentID" : "P010",
+        "amount" : 0.00,
+        "paymentDate" : "2025-03-20 14:01:00",
+        "eventName" : "Keynote: Dr. Cornel West"
+    },
+    {
+        "paymentID" : "P018",
+        "amount" : 0.00,
+        "paymentDate" : "2025-04-19 20:01:00",
+        "eventName" : "Keynote: Dr. Cornel West"
+    },
+    {
+        "paymentID" : "P032",
+        "amount" : 0.00,
+        "paymentDate" : "2025-04-23 19:01:00",
+        "eventName" : "Keynote: Dr. Cornel West"
+    },
+    {
+        "paymentID" : "P038",
+        "amount" : 12.00,
+        "paymentDate" : "2025-04-02 14:01:00",
+        "eventName" : "Spring Musical: Rent"
+    },
+    {
+        "paymentID" : "P040",
+        "amount" : 10.00,
+        "paymentDate" : "2025-04-12 13:01:00",
+        "eventName" : "HC Spring Weekend Fest"
+    },
+    {
+        "paymentID" : "P043",
+        "amount" : 0.00,
+        "paymentDate" : "2025-03-28 13:01:00",
+        "eventName" : "Keynote: Dr. Cornel West"
+    },
+    {
+        "paymentID" : "P060",
+        "amount" : 0.00,
+        "paymentDate" : "2025-03-25 13:01:00",
+        "eventName" : "CS Lecture: AI & Ethics"
+    }
+];
+
+// Insert rows into table
+let tableBody = '';
+paymentData.forEach(payment => {
+    tableBody += `<tr>
+        <td>${payment.paymentID}</td>
+        <td>${payment.amount.toFixed(2)}</td>
+        <td>${payment.paymentDate}</td>
+        <td>${payment.eventName}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#paymentsTable tbody').innerHTML = tableBody;
+    $('#paymentsTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

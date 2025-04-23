@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Comprehensive Event Overview</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Title -->
+<h1>Comprehensive Event Overview</h1>
+
+<!-- Table -->
+<table id="eventsOverviewTable" class="display">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Event Type</th>
+            <th>Event Date</th>
+            <th>Venue Name</th>
+            <th>Capacity</th>
+            <th>Tickets Sold</th>
+            <th>Revenue ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const eventOverviewData = [
+    {
+        "eventName" : "HC Hockey vs BU",
+        "EventType" : "Sports",
+        "eventDate" : "2025-11-15",
+        "venueName" : "Hart Center Arena",
+        "capacity" : 3500,
+        "TicketsSold" : 20,
+        "Revenue" : 285.00
+    },
+    {
+        "eventName" : "Football Homecoming Game",
+        "EventType" : "Sports",
+        "eventDate" : "2025-10-05",
+        "venueName" : "Fitton Field",
+        "capacity" : 23000,
+        "TicketsSold" : 16,
+        "Revenue" : 300.00
+    },
+    {
+        "eventName" : "Spring Musical: Rent",
+        "EventType" : "Theater",
+        "eventDate" : "2025-04-28",
+        "venueName" : "Linda Johnson Smith Theater",
+        "capacity" : 300,
+        "TicketsSold" : 19,
+        "Revenue" : 216.00
+    },
+    {
+        "eventName" : "Keynote: Dr. Cornel West",
+        "EventType" : "Conference",
+        "eventDate" : "2025-04-20",
+        "venueName" : "Hogan Campus Center",
+        "capacity" : 800,
+        "TicketsSold" : 20,
+        "Revenue" : 0.00
+    },
+    {
+        "eventName" : "CS Lecture: AI & Ethics",
+        "EventType" : "Conference",
+        "eventDate" : "2025-05-01",
+        "venueName" : "Dinand Library Conference Room",
+        "capacity" : 50,
+        "TicketsSold" : 19,
+        "Revenue" : 0.00
+    },
+    {
+        "eventName" : "HC Spring Weekend Fest",
+        "EventType" : "Festival",
+        "eventDate" : "2025-04-26",
+        "venueName" : "Freshman Field",
+        "capacity" : 1500,
+        "TicketsSold" : 17,
+        "Revenue" : 160.00
+    }
+];
+
+// Insert rows into table
+let tableBody = '';
+eventOverviewData.forEach(event => {
+    tableBody += `<tr>
+        <td>${event.eventName}</td>
+        <td>${event.EventType}</td>
+        <td>${event.eventDate}</td>
+        <td>${event.venueName}</td>
+        <td>${event.capacity}</td>
+        <td>${event.TicketsSold}</td>
+        <td>${event.Revenue.toFixed(2)}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#eventsOverviewTable tbody').innerHTML = tableBody;
+    $('#eventsOverviewTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Performance Comparison</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Title -->
+<h1>Event Performance Comparison</h1>
+
+<!-- Table -->
+<table id="eventPerformanceTable" class="display">
+    <thead>
+        <tr>
+            <th>Event Type</th>
+            <th>Number of Events</th>
+            <th>Total Attendees</th>
+            <th>Total Revenue ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const eventPerformanceData = [
+    {
+        "EventType" : "Sports",
+        "NumEvents" : 36,
+        "TotalAttendees" : 36,
+        "TotalRevenue" : 585.00
+    },
+    {
+        "EventType" : "Theater",
+        "NumEvents" : 19,
+        "TotalAttendees" : 19,
+        "TotalRevenue" : 216.00
+    },
+    {
+        "EventType" : "Festival",
+        "NumEvents" : 17,
+        "TotalAttendees" : 17,
+        "TotalRevenue" : 160.00
+    },
+    {
+        "EventType" : "Conference",
+        "NumEvents" : 39,
+        "TotalAttendees" : 39,
+        "TotalRevenue" : 0.00
+    }
+];
+
+// Insert rows into table
+let tableBody = '';
+eventPerformanceData.forEach(event => {
+    tableBody += `<tr>
+        <td>${event.EventType}</td>
+        <td>${event.NumEvents}</td>
+        <td>${event.TotalAttendees}</td>
+        <td>${event.TotalRevenue.toFixed(2)}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#eventPerformanceTable tbody').innerHTML = tableBody;
+    $('#eventPerformanceTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>
