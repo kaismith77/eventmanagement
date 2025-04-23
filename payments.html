@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Payments</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <a href="erd.html" class="back-link">Back to ERD</a>
+<h1>Payments</h1>
+
+<table id="paymentsTable" class="display">
+    <thead>
+        <tr>
+            <th>Payment ID</th>
+            <th>User ID</th>
+            <th>Assignment ID</th>
+            <th>Amount</th>
+            <th>Payment Date</th>
+            <th>Transaction ID</th>
+        </tr>
+    </thead>
+    <tbody id="paymentBody">
+        <!-- Rows will be injected by JavaScript -->
+    </tbody>
+</table>
+
+<!-- Data -->
+<script>
+    const payments = [
+	{
+		"paymentID" : "P001",
+		"userID" : "U000001",
+		"assignmentID" : "A001",
+		"amount" : 15.00,
+		"paymentDate" : "2025-03-01 12:01:00",
+		"transactionID" : "TX00001"
+	},
+	{
+		"paymentID" : "P002",
+		"userID" : "U000002",
+		"assignmentID" : "A002",
+		"amount" : 20.00,
+		"paymentDate" : "2025-03-02 12:31:00",
+		"transactionID" : "TX00002"
+	},
+	{
+		"paymentID" : "P003",
+		"userID" : "U000003",
+		"assignmentID" : "A003",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-03 13:01:00",
+		"transactionID" : "TX00003"
+	},
+	{
+		"paymentID" : "P004",
+		"userID" : "U000004",
+		"assignmentID" : "A004",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-04 13:31:00",
+		"transactionID" : "TX00004"
+	},
+	{
+		"paymentID" : "P005",
+		"userID" : "U000005",
+		"assignmentID" : "A005",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-05 14:01:00",
+		"transactionID" : "TX00005"
+	},
+	{
+		"paymentID" : "P006",
+		"userID" : "U000006",
+		"assignmentID" : "A006",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-06 14:31:00",
+		"transactionID" : "TX00006"
+	},
+	{
+		"paymentID" : "P007",
+		"userID" : "U000002",
+		"assignmentID" : "A007",
+		"amount" : 15.00,
+		"paymentDate" : "2025-03-07 15:01:00",
+		"transactionID" : "TX00007"
+	},
+	{
+		"paymentID" : "P008",
+		"userID" : "U000003",
+		"assignmentID" : "A008",
+		"amount" : 15.00,
+		"paymentDate" : "2025-03-08 15:31:00",
+		"transactionID" : "TX00008"
+	},
+	{
+		"paymentID" : "P009",
+		"userID" : "U000002",
+		"assignmentID" : "A009",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-06 11:01:00",
+		"transactionID" : "TX10009"
+	},
+	{
+		"paymentID" : "P010",
+		"userID" : "U000001",
+		"assignmentID" : "A010",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-20 14:01:00",
+		"transactionID" : "TX10010"
+	},
+	{
+		"paymentID" : "P011",
+		"userID" : "U000004",
+		"assignmentID" : "A011",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-14 19:01:00",
+		"transactionID" : "TX10011"
+	},
+	{
+		"paymentID" : "P012",
+		"userID" : "U000004",
+		"assignmentID" : "A012",
+		"amount" : 20.00,
+		"paymentDate" : "2025-03-27 15:01:00",
+		"transactionID" : "TX10012"
+	},
+	{
+		"paymentID" : "P013",
+		"userID" : "U000005",
+		"assignmentID" : "A013",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-24 20:01:00",
+		"transactionID" : "TX10013"
+	},
+	{
+		"paymentID" : "P014",
+		"userID" : "U000005",
+		"assignmentID" : "A014",
+		"amount" : 10.00,
+		"paymentDate" : "2025-04-24 17:01:00",
+		"transactionID" : "TX10014"
+	},
+	{
+		"paymentID" : "P015",
+		"userID" : "U000004",
+		"assignmentID" : "A015",
+		"amount" : 20.00,
+		"paymentDate" : "2025-04-01 12:01:00",
+		"transactionID" : "TX10015"
+	},
+	{
+		"paymentID" : "P016",
+		"userID" : "U000002",
+		"assignmentID" : "A016",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-26 11:01:00",
+		"transactionID" : "TX10016"
+	},
+	{
+		"paymentID" : "P017",
+		"userID" : "U000005",
+		"assignmentID" : "A017",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-05 10:01:00",
+		"transactionID" : "TX10017"
+	},
+	{
+		"paymentID" : "P018",
+		"userID" : "U000001",
+		"assignmentID" : "A018",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-19 20:01:00",
+		"transactionID" : "TX10018"
+	},
+	{
+		"paymentID" : "P019",
+		"userID" : "U000002",
+		"assignmentID" : "A019",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-19 17:01:00",
+		"transactionID" : "TX10019"
+	},
+	{
+		"paymentID" : "P020",
+		"userID" : "U000002",
+		"assignmentID" : "A020",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-12 16:01:00",
+		"transactionID" : "TX10020"
+	},
+	{
+		"paymentID" : "P021",
+		"userID" : "U000004",
+		"assignmentID" : "A021",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-20 17:01:00",
+		"transactionID" : "TX10021"
+	},
+	{
+		"paymentID" : "P022",
+		"userID" : "U000006",
+		"assignmentID" : "A022",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-17 11:01:00",
+		"transactionID" : "TX10022"
+	},
+	{
+		"paymentID" : "P023",
+		"userID" : "U000006",
+		"assignmentID" : "A023",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-05 19:01:00",
+		"transactionID" : "TX10023"
+	},
+	{
+		"paymentID" : "P024",
+		"userID" : "U000004",
+		"assignmentID" : "A024",
+		"amount" : 20.00,
+		"paymentDate" : "2025-03-12 18:01:00",
+		"transactionID" : "TX10024"
+	},
+	{
+		"paymentID" : "P025",
+		"userID" : "U000006",
+		"assignmentID" : "A025",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-21 12:01:00",
+		"transactionID" : "TX10025"
+	},
+	{
+		"paymentID" : "P026",
+		"userID" : "U000003",
+		"assignmentID" : "A026",
+		"amount" : 12.00,
+		"paymentDate" : "2025-04-08 19:01:00",
+		"transactionID" : "TX10026"
+	},
+	{
+		"paymentID" : "P027",
+		"userID" : "U000004",
+		"assignmentID" : "A027",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-19 19:01:00",
+		"transactionID" : "TX10027"
+	},
+	{
+		"paymentID" : "P028",
+		"userID" : "U000002",
+		"assignmentID" : "A028",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-25 19:01:00",
+		"transactionID" : "TX10028"
+	},
+	{
+		"paymentID" : "P029",
+		"userID" : "U000004",
+		"assignmentID" : "A029",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-11 11:01:00",
+		"transactionID" : "TX10029"
+	},
+	{
+		"paymentID" : "P030",
+		"userID" : "U000002",
+		"assignmentID" : "A030",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-12 20:01:00",
+		"transactionID" : "TX10030"
+	},
+	{
+		"paymentID" : "P031",
+		"userID" : "U000003",
+		"assignmentID" : "A031",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-20 17:01:00",
+		"transactionID" : "TX10031"
+	},
+	{
+		"paymentID" : "P032",
+		"userID" : "U000001",
+		"assignmentID" : "A032",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-23 19:01:00",
+		"transactionID" : "TX10032"
+	},
+	{
+		"paymentID" : "P033",
+		"userID" : "U000005",
+		"assignmentID" : "A033",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-04 13:01:00",
+		"transactionID" : "TX10033"
+	},
+	{
+		"paymentID" : "P034",
+		"userID" : "U000002",
+		"assignmentID" : "A034",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-16 12:01:00",
+		"transactionID" : "TX10034"
+	},
+	{
+		"paymentID" : "P035",
+		"userID" : "U000004",
+		"assignmentID" : "A035",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-01 12:01:00",
+		"transactionID" : "TX10035"
+	},
+	{
+		"paymentID" : "P036",
+		"userID" : "U000004",
+		"assignmentID" : "A036",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-16 20:01:00",
+		"transactionID" : "TX10036"
+	},
+	{
+		"paymentID" : "P037",
+		"userID" : "U000006",
+		"assignmentID" : "A037",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-30 10:01:00",
+		"transactionID" : "TX10037"
+	},
+	{
+		"paymentID" : "P038",
+		"userID" : "U000001",
+		"assignmentID" : "A038",
+		"amount" : 12.00,
+		"paymentDate" : "2025-04-02 14:01:00",
+		"transactionID" : "TX10038"
+	},
+	{
+		"paymentID" : "P039",
+		"userID" : "U000003",
+		"assignmentID" : "A039",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-07 19:01:00",
+		"transactionID" : "TX10039"
+	},
+	{
+		"paymentID" : "P040",
+		"userID" : "U000001",
+		"assignmentID" : "A040",
+		"amount" : 10.00,
+		"paymentDate" : "2025-04-12 13:01:00",
+		"transactionID" : "TX10040"
+	},
+	{
+		"paymentID" : "P041",
+		"userID" : "U000004",
+		"assignmentID" : "A041",
+		"amount" : 20.00,
+		"paymentDate" : "2025-04-21 18:01:00",
+		"transactionID" : "TX10041"
+	},
+	{
+		"paymentID" : "P042",
+		"userID" : "U000004",
+		"assignmentID" : "A042",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-04 20:01:00",
+		"transactionID" : "TX10042"
+	},
+	{
+		"paymentID" : "P043",
+		"userID" : "U000001",
+		"assignmentID" : "A043",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-28 13:01:00",
+		"transactionID" : "TX10043"
+	},
+	{
+		"paymentID" : "P044",
+		"userID" : "U000003",
+		"assignmentID" : "A044",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-20 13:01:00",
+		"transactionID" : "TX10044"
+	},
+	{
+		"paymentID" : "P045",
+		"userID" : "U000002",
+		"assignmentID" : "A045",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-24 19:01:00",
+		"transactionID" : "TX10045"
+	},
+	{
+		"paymentID" : "P046",
+		"userID" : "U000006",
+		"assignmentID" : "A046",
+		"amount" : 12.00,
+		"paymentDate" : "2025-04-04 19:01:00",
+		"transactionID" : "TX10046"
+	},
+	{
+		"paymentID" : "P047",
+		"userID" : "U000006",
+		"assignmentID" : "A047",
+		"amount" : 15.00,
+		"paymentDate" : "2025-03-31 11:01:00",
+		"transactionID" : "TX10047"
+	},
+	{
+		"paymentID" : "P048",
+		"userID" : "U000006",
+		"assignmentID" : "A048",
+		"amount" : 10.00,
+		"paymentDate" : "2025-04-09 12:01:00",
+		"transactionID" : "TX10048"
+	},
+	{
+		"paymentID" : "P049",
+		"userID" : "U000004",
+		"assignmentID" : "A049",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-17 11:01:00",
+		"transactionID" : "TX10049"
+	},
+	{
+		"paymentID" : "P050",
+		"userID" : "U000002",
+		"assignmentID" : "A050",
+		"amount" : 20.00,
+		"paymentDate" : "2025-03-12 16:01:00",
+		"transactionID" : "TX10050"
+	},
+	{
+		"paymentID" : "P051",
+		"userID" : "U000004",
+		"assignmentID" : "A051",
+		"amount" : 20.00,
+		"paymentDate" : "2025-04-14 16:01:00",
+		"transactionID" : "TX10051"
+	},
+	{
+		"paymentID" : "P052",
+		"userID" : "U000003",
+		"assignmentID" : "A052",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-28 15:01:00",
+		"transactionID" : "TX10052"
+	},
+	{
+		"paymentID" : "P053",
+		"userID" : "U000006",
+		"assignmentID" : "A053",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-02 19:01:00",
+		"transactionID" : "TX10053"
+	},
+	{
+		"paymentID" : "P054",
+		"userID" : "U000003",
+		"assignmentID" : "A054",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-21 18:01:00",
+		"transactionID" : "TX10054"
+	},
+	{
+		"paymentID" : "P055",
+		"userID" : "U000002",
+		"assignmentID" : "A055",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-22 11:01:00",
+		"transactionID" : "TX10055"
+	},
+	{
+		"paymentID" : "P056",
+		"userID" : "U000004",
+		"assignmentID" : "A056",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-27 18:01:00",
+		"transactionID" : "TX10056"
+	},
+	{
+		"paymentID" : "P057",
+		"userID" : "U000005",
+		"assignmentID" : "A057",
+		"amount" : 12.00,
+		"paymentDate" : "2025-04-13 12:01:00",
+		"transactionID" : "TX10057"
+	},
+	{
+		"paymentID" : "P058",
+		"userID" : "U000002",
+		"assignmentID" : "A058",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-22 10:01:00",
+		"transactionID" : "TX10058"
+	},
+	{
+		"paymentID" : "P059",
+		"userID" : "U000003",
+		"assignmentID" : "A059",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-10 11:01:00",
+		"transactionID" : "TX10059"
+	},
+	{
+		"paymentID" : "P060",
+		"userID" : "U000001",
+		"assignmentID" : "A060",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-25 13:01:00",
+		"transactionID" : "TX10060"
+	},
+	{
+		"paymentID" : "P061",
+		"userID" : "U000007",
+		"assignmentID" : "A067",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-01 12:01:00",
+		"transactionID" : "TX01067"
+	},
+	{
+		"paymentID" : "P062",
+		"userID" : "U000008",
+		"assignmentID" : "A068",
+		"amount" : 20.00,
+		"paymentDate" : "2025-04-02 13:01:00",
+		"transactionID" : "TX01068"
+	},
+	{
+		"paymentID" : "P063",
+		"userID" : "U000009",
+		"assignmentID" : "A069",
+		"amount" : 12.00,
+		"paymentDate" : "2025-04-03 14:01:00",
+		"transactionID" : "TX01069"
+	},
+	{
+		"paymentID" : "P064",
+		"userID" : "U000010",
+		"assignmentID" : "A070",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-04 15:01:00",
+		"transactionID" : "TX01070"
+	},
+	{
+		"paymentID" : "P065",
+		"userID" : "U000011",
+		"assignmentID" : "A071",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-05 16:01:00",
+		"transactionID" : "TX01071"
+	},
+	{
+		"paymentID" : "P066",
+		"userID" : "U000012",
+		"assignmentID" : "A072",
+		"amount" : 10.00,
+		"paymentDate" : "2025-04-06 17:01:00",
+		"transactionID" : "TX01072"
+	},
+	{
+		"paymentID" : "P067",
+		"userID" : "U000013",
+		"assignmentID" : "A073",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-07 18:01:00",
+		"transactionID" : "TX01073"
+	},
+	{
+		"paymentID" : "P068",
+		"userID" : "U000014",
+		"assignmentID" : "A074",
+		"amount" : 20.00,
+		"paymentDate" : "2025-04-08 19:01:00",
+		"transactionID" : "TX01074"
+	},
+	{
+		"paymentID" : "P069",
+		"userID" : "U000015",
+		"assignmentID" : "A075",
+		"amount" : 12.00,
+		"paymentDate" : "2025-04-09 12:01:00",
+		"transactionID" : "TX01075"
+	},
+	{
+		"paymentID" : "P070",
+		"userID" : "U000016",
+		"assignmentID" : "A076",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-10 13:01:00",
+		"transactionID" : "TX01076"
+	},
+	{
+		"paymentID" : "P071",
+		"userID" : "U000017",
+		"assignmentID" : "A077",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-11 14:01:00",
+		"transactionID" : "TX01077"
+	},
+	{
+		"paymentID" : "P072",
+		"userID" : "U000018",
+		"assignmentID" : "A078",
+		"amount" : 10.00,
+		"paymentDate" : "2025-04-12 15:01:00",
+		"transactionID" : "TX01078"
+	},
+	{
+		"paymentID" : "P073",
+		"userID" : "U000019",
+		"assignmentID" : "A079",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-13 16:01:00",
+		"transactionID" : "TX01079"
+	},
+	{
+		"paymentID" : "P074",
+		"userID" : "U000020",
+		"assignmentID" : "A080",
+		"amount" : 20.00,
+		"paymentDate" : "2025-04-14 17:01:00",
+		"transactionID" : "TX01080"
+	},
+	{
+		"paymentID" : "P075",
+		"userID" : "U000021",
+		"assignmentID" : "A081",
+		"amount" : 12.00,
+		"paymentDate" : "2025-04-15 18:01:00",
+		"transactionID" : "TX01081"
+	},
+	{
+		"paymentID" : "P076",
+		"userID" : "U000022",
+		"assignmentID" : "A082",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-16 19:01:00",
+		"transactionID" : "TX01082"
+	},
+	{
+		"paymentID" : "P077",
+		"userID" : "U000023",
+		"assignmentID" : "A083",
+		"amount" : 0.00,
+		"paymentDate" : "2025-04-17 12:01:00",
+		"transactionID" : "TX01083"
+	},
+	{
+		"paymentID" : "P078",
+		"userID" : "U000024",
+		"assignmentID" : "A084",
+		"amount" : 10.00,
+		"paymentDate" : "2025-04-18 13:01:00",
+		"transactionID" : "TX01084"
+	},
+	{
+		"paymentID" : "P079",
+		"userID" : "U000025",
+		"assignmentID" : "A085",
+		"amount" : 15.00,
+		"paymentDate" : "2025-04-19 14:01:00",
+		"transactionID" : "TX01085"
+	},
+	{
+		"paymentID" : "P080",
+		"userID" : "U000026",
+		"assignmentID" : "A086",
+		"amount" : 20.00,
+		"paymentDate" : "2025-04-20 15:01:00",
+		"transactionID" : "TX01086"
+	},
+	{
+		"paymentID" : "P081",
+		"userID" : "U000055",
+		"assignmentID" : "A107",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-07 15:01:00",
+		"transactionID" : "TX01081"
+	},
+	{
+		"paymentID" : "P082",
+		"userID" : "U000052",
+		"assignmentID" : "A108",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-08 15:01:00",
+		"transactionID" : "TX01082"
+	},
+	{
+		"paymentID" : "P083",
+		"userID" : "U000053",
+		"assignmentID" : "A109",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-09 15:01:00",
+		"transactionID" : "TX01083"
+	},
+	{
+		"paymentID" : "P084",
+		"userID" : "U000055",
+		"assignmentID" : "A110",
+		"amount" : 20.00,
+		"paymentDate" : "2025-03-10 15:01:00",
+		"transactionID" : "TX01084"
+	},
+	{
+		"paymentID" : "P085",
+		"userID" : "U000052",
+		"assignmentID" : "A111",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-11 15:01:00",
+		"transactionID" : "TX01085"
+	},
+	{
+		"paymentID" : "P086",
+		"userID" : "U000040",
+		"assignmentID" : "A112",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-12 15:01:00",
+		"transactionID" : "TX01086"
+	},
+	{
+		"paymentID" : "P087",
+		"userID" : "U000031",
+		"assignmentID" : "A113",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-13 15:01:00",
+		"transactionID" : "TX01087"
+	},
+	{
+		"paymentID" : "P088",
+		"userID" : "U000028",
+		"assignmentID" : "A114",
+		"amount" : 15.00,
+		"paymentDate" : "2025-03-14 15:01:00",
+		"transactionID" : "TX01088"
+	},
+	{
+		"paymentID" : "P089",
+		"userID" : "U000036",
+		"assignmentID" : "A115",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-15 15:01:00",
+		"transactionID" : "TX01089"
+	},
+	{
+		"paymentID" : "P090",
+		"userID" : "U000041",
+		"assignmentID" : "A116",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-16 15:01:00",
+		"transactionID" : "TX01090"
+	},
+	{
+		"paymentID" : "P091",
+		"userID" : "U000011",
+		"assignmentID" : "A117",
+		"amount" : 15.00,
+		"paymentDate" : "2025-03-17 15:01:00",
+		"transactionID" : "TX01091"
+	},
+	{
+		"paymentID" : "P092",
+		"userID" : "U000027",
+		"assignmentID" : "A118",
+		"amount" : 20.00,
+		"paymentDate" : "2025-03-18 15:01:00",
+		"transactionID" : "TX01092"
+	},
+	{
+		"paymentID" : "P093",
+		"userID" : "U000010",
+		"assignmentID" : "A119",
+		"amount" : 15.00,
+		"paymentDate" : "2025-03-19 15:01:00",
+		"transactionID" : "TX01093"
+	},
+	{
+		"paymentID" : "P094",
+		"userID" : "U000059",
+		"assignmentID" : "A120",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-20 15:01:00",
+		"transactionID" : "TX01094"
+	},
+	{
+		"paymentID" : "P095",
+		"userID" : "U000016",
+		"assignmentID" : "A121",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-21 15:01:00",
+		"transactionID" : "TX01095"
+	},
+	{
+		"paymentID" : "P096",
+		"userID" : "U000027",
+		"assignmentID" : "A122",
+		"amount" : 15.00,
+		"paymentDate" : "2025-03-22 15:01:00",
+		"transactionID" : "TX01096"
+	},
+	{
+		"paymentID" : "P097",
+		"userID" : "U000045",
+		"assignmentID" : "A123",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-23 15:01:00",
+		"transactionID" : "TX01097"
+	},
+	{
+		"paymentID" : "P098",
+		"userID" : "U000041",
+		"assignmentID" : "A124",
+		"amount" : 20.00,
+		"paymentDate" : "2025-03-24 15:01:00",
+		"transactionID" : "TX01098"
+	},
+	{
+		"paymentID" : "P099",
+		"userID" : "U000054",
+		"assignmentID" : "A125",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-25 15:01:00",
+		"transactionID" : "TX01099"
+	},
+	{
+		"paymentID" : "P100",
+		"userID" : "U000029",
+		"assignmentID" : "A126",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-26 15:01:00",
+		"transactionID" : "TX01100"
+	},
+	{
+		"paymentID" : "P101",
+		"userID" : "U000060",
+		"assignmentID" : "A127",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-27 15:01:00",
+		"transactionID" : "TX01101"
+	},
+	{
+		"paymentID" : "P102",
+		"userID" : "U000024",
+		"assignmentID" : "A128",
+		"amount" : 0.00,
+		"paymentDate" : "2025-03-28 15:01:00",
+		"transactionID" : "TX01102"
+	},
+	{
+		"paymentID" : "P103",
+		"userID" : "U000028",
+		"assignmentID" : "A129",
+		"amount" : 10.00,
+		"paymentDate" : "2025-03-29 15:01:00",
+		"transactionID" : "TX01103"
+	},
+	{
+		"paymentID" : "P104",
+		"userID" : "U000015",
+		"assignmentID" : "A130",
+		"amount" : 20.00,
+		"paymentDate" : "2025-03-30 15:01:00",
+		"transactionID" : "TX01104"
+	},
+	{
+		"paymentID" : "P105",
+		"userID" : "U000015",
+		"assignmentID" : "A131",
+		"amount" : 12.00,
+		"paymentDate" : "2025-03-31 15:01:00",
+		"transactionID" : "TX01105"
+	}
+]
+;
+</script>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const tbody = $('#paymentBody');
+        payments.forEach(payment => {
+            const row = `
+                <tr>
+                    <td>${payment.paymentID}</td>
+                    <td>${payment.userID}</td>
+                    <td>${payment.assignmentID}</td>
+                    <td>$${payment.amount.toFixed(2)}</td>
+                    <td>${payment.paymentDate}</td>
+                    <td>${payment.transactionID}</td>
+                </tr>`;
+            tbody.append(row);
+        });
+        $('#paymentsTable').DataTable();
+    });
+</script>
+
+</body>
+</html>

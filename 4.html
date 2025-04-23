@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Venue Utilization Efficiency</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Page Title -->
+<h1>Venue Utilization Efficiency</h1>
+
+<!-- Table -->
+<table id="venueTable" class="display">
+    <thead>
+        <tr>
+            <th>Venue Name</th>
+            <th>Capacity</th>
+            <th>Total Tickets Sold</th>
+            <th>Utilization Rate (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const venueData = [
+    {
+        "venueName": "Hart Center Arena",
+        "capacity": 3500,
+        "TotalTicketsSold": 20,
+        "UtilizationRate": 0.57
+    },
+    {
+        "venueName": "Fitton Field",
+        "capacity": 23000,
+        "TotalTicketsSold": 16,
+        "UtilizationRate": 0.07
+    },
+    {
+        "venueName": "Linda Johnson Smith Theater",
+        "capacity": 300,
+        "TotalTicketsSold": 19,
+        "UtilizationRate": 6.33
+    },
+    {
+        "venueName": "Hogan Campus Center",
+        "capacity": 800,
+        "TotalTicketsSold": 20,
+        "UtilizationRate": 2.50
+    },
+    {
+        "venueName": "Dinand Library Conference Room",
+        "capacity": 50,
+        "TotalTicketsSold": 19,
+        "UtilizationRate": 38.00
+    },
+    {
+        "venueName": "Freshman Field",
+        "capacity": 1500,
+        "TotalTicketsSold": 17,
+        "UtilizationRate": 1.13
+    }
+];
+
+// Insert rows into the table
+let tableBody = '';
+venueData.forEach(venue => {
+    tableBody += `<tr>
+        <td>${venue.venueName}</td>
+        <td>${venue.capacity}</td>
+        <td>${venue.TotalTicketsSold}</td>
+        <td>${venue.UtilizationRate.toFixed(2)}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#venueTable tbody').innerHTML = tableBody;
+    $('#venueTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

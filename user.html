@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const tbody = $('#paymentBody');
+        payments.forEach(payment => {
+            const row = `
+                <tr>
+                    <td>${payment.userID}</td>
+                    <td>${payment.name}</td>
+                    <td>${payment.email}</td>
+                    <td>${payment.areacode}</td>
+                    <td>${payment.phone}</td>
+                    <td>${payment.city}</td>
+                    <td>${payment.state}</td>
+                    <td>${payment.zipcode}</td>
+                    <td>${payment.dateOfBirth}</td>
+                    <td>${payment.registrationDate}</td>
+                </tr>
+            `;
+            tbody.append(row);
+        });
+
+        // Initialize DataTable
+        $('#paymentsTable').DataTable();
+    });
+</script>
+<body>
+    <a href="erd.html" class="back-link">Back to ERD</a>
+<h1>Users</h1>
+
+<table id="paymentsTable" class="display">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Area Code</th>
+            <th>Phone</th>
+            <th>City</th>
+	    <th>State</th>
+	    <th>Zip Code</th>
+	    <th>Date of Birth</th>
+	    <th>Registration Date</th>
+        </tr>
+    </thead>
+    <tbody id="paymentBody">
+        <!-- Rows will be injected by JavaScript -->
+    </tbody>
+</table>
+
+<!-- Data -->
+<script>
+    const payments = [
+	{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"email" : "alicec@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551001",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-08-15",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"email" : "bobsmith@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551002",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-02-10",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000003",
+		"name" : "Carla Lopez",
+		"email" : "carla.lopez@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551003",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-06-21",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"email" : "danwu@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551004",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-11-30",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000005",
+		"name" : "Elena Rossi",
+		"email" : "elena.rossi@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551005",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-01-12",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000006",
+		"name" : "Frank Zhang",
+		"email" : "fzhang@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551006",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-12-01",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000007",
+		"name" : "Grace Lee",
+		"email" : "grace.lee@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551007",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-03-14",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000008",
+		"name" : "Henry Patel",
+		"email" : "henryp@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551008",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-09-08",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000009",
+		"name" : "Isabel Kim",
+		"email" : "ikim@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551009",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-04-19",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000010",
+		"name" : "James Thompson",
+		"email" : "james.t@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551010",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-07-23",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000011",
+		"name" : "Test User 11",
+		"email" : "user11@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551011",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2004-04-24",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000012",
+		"name" : "Test User 12",
+		"email" : "user12@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551012",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-09-25",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000013",
+		"name" : "Test User 13",
+		"email" : "user13@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551013",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-01-24",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000014",
+		"name" : "Test User 14",
+		"email" : "user14@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551014",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2004-04-09",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000015",
+		"name" : "Test User 15",
+		"email" : "user15@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551015",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-02-23",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000016",
+		"name" : "Test User 16",
+		"email" : "user16@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551016",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-03-04",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000017",
+		"name" : "Test User 17",
+		"email" : "user17@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551017",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-07-28",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000018",
+		"name" : "Test User 18",
+		"email" : "user18@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551018",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-12-20",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000019",
+		"name" : "Test User 19",
+		"email" : "user19@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551019",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-11-17",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000020",
+		"name" : "Test User 20",
+		"email" : "user20@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551020",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-06-30",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000021",
+		"name" : "Test User 21",
+		"email" : "user21@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551021",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-10-14",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000022",
+		"name" : "Test User 22",
+		"email" : "user22@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551022",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2004-03-12",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000023",
+		"name" : "Test User 23",
+		"email" : "user23@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551023",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-02-27",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000024",
+		"name" : "Test User 24",
+		"email" : "user24@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551024",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-01-03",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000025",
+		"name" : "Test User 25",
+		"email" : "user25@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551025",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-05-08",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000026",
+		"name" : "Test User 26",
+		"email" : "user26@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551026",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-06-06",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000027",
+		"name" : "Test User 27",
+		"email" : "user27@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551027",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2004-08-15",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000028",
+		"name" : "Test User 28",
+		"email" : "user28@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551028",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-01-01",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000029",
+		"name" : "Test User 29",
+		"email" : "user29@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551029",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-04-05",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000030",
+		"name" : "Test User 30",
+		"email" : "user30@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551030",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-11-09",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000031",
+		"name" : "Test User 31",
+		"email" : "user31@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551031",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-07-01",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000032",
+		"name" : "Test User 32",
+		"email" : "user32@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551032",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-02-12",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000033",
+		"name" : "Test User 33",
+		"email" : "user33@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551033",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2004-10-17",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000034",
+		"name" : "Test User 34",
+		"email" : "user34@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551034",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-03-29",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000035",
+		"name" : "Test User 35",
+		"email" : "user35@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551035",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-09-05",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000036",
+		"name" : "Test User 36",
+		"email" : "user36@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551036",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-12-11",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000037",
+		"name" : "Test User 37",
+		"email" : "user37@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551037",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-06-19",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000038",
+		"name" : "Test User 38",
+		"email" : "user38@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551038",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-11-04",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000039",
+		"name" : "Test User 39",
+		"email" : "user39@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551039",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-05-20",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000040",
+		"name" : "Test User 40",
+		"email" : "user40@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551040",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-02-15",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000041",
+		"name" : "Test User 41",
+		"email" : "user41@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551041",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-06-18",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000042",
+		"name" : "Test User 42",
+		"email" : "user42@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551042",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-10-03",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000043",
+		"name" : "Test User 43",
+		"email" : "user43@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551043",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2004-01-30",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000044",
+		"name" : "Test User 44",
+		"email" : "user44@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551044",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-04-14",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000045",
+		"name" : "Test User 45",
+		"email" : "user45@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551045",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-09-08",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000046",
+		"name" : "Test User 46",
+		"email" : "user46@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551046",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-07-21",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000047",
+		"name" : "Test User 47",
+		"email" : "user47@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551047",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-08-27",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000048",
+		"name" : "Test User 48",
+		"email" : "user48@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551048",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-03-22",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000049",
+		"name" : "Test User 49",
+		"email" : "user49@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551049",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-12-06",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000050",
+		"name" : "Test User 50",
+		"email" : "user50@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551050",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-08-01",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000051",
+		"name" : "Test User 51",
+		"email" : "user51@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551051",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2004-03-10",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000052",
+		"name" : "Test User 52",
+		"email" : "user52@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551052",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-05-25",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000053",
+		"name" : "Test User 53",
+		"email" : "user53@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551053",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-12-16",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000054",
+		"name" : "Test User 54",
+		"email" : "user54@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551054",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-05-13",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000055",
+		"name" : "Test User 55",
+		"email" : "user55@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551055",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2003-10-26",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000056",
+		"name" : "Test User 56",
+		"email" : "user56@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551056",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2004-09-04",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000057",
+		"name" : "Test User 57",
+		"email" : "user57@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551057",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-06-02",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000058",
+		"name" : "Test User 58",
+		"email" : "user58@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551058",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2002-07-31",
+		"registrationDate" : "2024-01-10"
+	},
+	{
+		"userID" : "U000059",
+		"name" : "Test User 59",
+		"email" : "user59@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551059",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2000-09-22",
+		"registrationDate" : "2023-09-01"
+	},
+	{
+		"userID" : "U000060",
+		"name" : "Test User 60",
+		"email" : "user60@hc.edu",
+		"areacode" : "508",
+		"phone" : "5551060",
+		"city" : "Worcester",
+		"state" : "MA",
+		"zipcode" : "01610",
+		"dateOfBirth" : "2001-08-11",
+		"registrationDate" : "2023-09-01"
+	}
+]
+
+;
+</script>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        const tbody = $('#paymentBody');
+        payments.forEach(payment => {
+            const row = `
+                <tr>
+                    <td>${payment.paymentID}</td>
+                    <td>${payment.userID}</td>
+                    <td>${payment.assignmentID}</td>
+                    <td>$${payment.amount.toFixed(2)}</td>
+                    <td>${payment.paymentDate}</td>
+                    <td>${payment.transactionID}</td>
+                </tr>`;
+            tbody.append(row);
+        });
+        $('#paymentsTable').DataTable();
+    });
+</script>
+
+</body>
+</html>

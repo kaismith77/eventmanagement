@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Poorly Attended Events</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Page Title -->
+<h1>Poorly Attended Events</h1>
+
+<!-- Table -->
+<table id="poorAttendanceTable" class="display">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Capacity</th>
+            <th>Tickets Sold</th>
+            <th>Attendance Rate (%)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const poorAttendanceData = [
+    {
+        "eventName": "HC Hockey vs BU",
+        "capacity": 3500,
+        "TicketsSold": 20,
+        "AttendanceRate": 0.57
+    },
+    {
+        "eventName": "Football Homecoming Game",
+        "capacity": 23000,
+        "TicketsSold": 16,
+        "AttendanceRate": 0.07
+    },
+    {
+        "eventName": "Spring Musical: Rent",
+        "capacity": 300,
+        "TicketsSold": 19,
+        "AttendanceRate": 6.33
+    },
+    {
+        "eventName": "Keynote: Dr. Cornel West",
+        "capacity": 800,
+        "TicketsSold": 20,
+        "AttendanceRate": 2.50
+    },
+    {
+        "eventName": "HC Spring Weekend Fest",
+        "capacity": 1500,
+        "TicketsSold": 17,
+        "AttendanceRate": 1.13
+    }
+];
+
+// Insert rows into the table
+let tableBody = '';
+poorAttendanceData.forEach(event => {
+    tableBody += `<tr>
+        <td>${event.eventName}</td>
+        <td>${event.capacity}</td>
+        <td>${event.TicketsSold}</td>
+        <td>${event.AttendanceRate.toFixed(2)}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#poorAttendanceTable tbody').innerHTML = tableBody;
+    $('#poorAttendanceTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

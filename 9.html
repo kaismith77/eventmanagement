@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Members and Shifts</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Page Title -->
+<h1>Staff Members and Shifts</h1>
+
+<!-- Table -->
+<table id="staffShiftsTable" class="display">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Shift Start</th>
+            <th>Shift End</th>
+            <th>Event Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const staffData = [
+    {
+        "name": "Maya Jones",
+        "role": "Event Coordinator",
+        "shiftStart": "2025-04-26 12:00:00",
+        "shiftEnd": "2025-04-26 18:00:00",
+        "eventName": "HC Spring Weekend Fest"
+    },
+    {
+        "name": "Sofia Martinez",
+        "role": "Medical Staff",
+        "shiftStart": "2025-04-26 13:00:00",
+        "shiftEnd": "2025-04-26 17:30:00",
+        "eventName": "HC Spring Weekend Fest"
+    },
+    {
+        "name": "Dana Patel",
+        "role": "Stage Manager",
+        "shiftStart": "2025-04-28 16:00:00",
+        "shiftEnd": "2025-04-28 22:00:00",
+        "eventName": "Spring Musical: Rent"
+    },
+    {
+        "name": "Taylor Nguyen",
+        "role": "Sound Technician",
+        "shiftStart": "2025-04-28 17:00:00",
+        "shiftEnd": "2025-04-28 22:00:00",
+        "eventName": "Spring Musical: Rent"
+    }
+];
+
+// Insert rows into the table
+let tableBody = '';
+staffData.forEach(staff => {
+    tableBody += `<tr>
+        <td>${staff.name}</td>
+        <td>${staff.role}</td>
+        <td>${staff.shiftStart}</td>
+        <td>${staff.shiftEnd}</td>
+        <td>${staff.eventName}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#staffShiftsTable tbody').innerHTML = tableBody;
+    $('#staffShiftsTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

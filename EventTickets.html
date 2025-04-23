@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Tickets</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+
+<a href="erd.html" class="back-link">Back to ERD</a>
+<h1>Event Tickets</h1>
+
+<table id="ticketsTable" class="display">
+    <thead>
+        <tr>
+            <th>Ticket ID</th>
+            <th>Event ID</th>
+            <th>Price</th>
+            <th>Ticket Limit</th>
+        </tr>
+    </thead>
+    <tbody id="ticketBody">
+        <!-- Rows will be inserted here -->
+    </tbody>
+</table>
+
+<!-- Embedded Ticket Data -->
+<script>
+const eventTickets = [
+    { "eventTicketID": "T001", "eventID": "E001", "price": 15.00, "ticketLimit": 1000 },
+    { "eventTicketID": "T002", "eventID": "E002", "price": 20.00, "ticketLimit": 2000 },
+    { "eventTicketID": "T003", "eventID": "E003", "price": 12.00, "ticketLimit": 200 },
+    { "eventTicketID": "T004", "eventID": "E004", "price": 0.00, "ticketLimit": 800 },
+    { "eventTicketID": "T005", "eventID": "E005", "price": 0.00, "ticketLimit": 50 },
+    { "eventTicketID": "T006", "eventID": "E006", "price": 10.00, "ticketLimit": 1000 }
+];
+</script>
+
+<!-- jQuery & DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    const tbody = $('#ticketBody');
+    eventTickets.forEach(ticket => {
+        const row = `
+            <tr>
+                <td>${ticket.eventTicketID}</td>
+                <td>${ticket.eventID}</td>
+                <td>$${ticket.price.toFixed(2)}</td>
+                <td>${ticket.ticketLimit}</td>
+            </tr>`;
+        tbody.append(row);
+    });
+
+    $('#ticketsTable').DataTable({
+        pageLength: 10,
+        order: [[1, 'asc']]
+    });
+});
+</script>
+
+</body>
+</html>
+

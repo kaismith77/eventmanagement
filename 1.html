@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events by Type</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Title -->
+<h1>Upcoming Events By Type</h1>
+
+<!-- Table -->
+<table id="eventsTable" class="display">
+    <thead>
+        <tr>
+            <th>Event Type</th>
+            <th>Event Name</th>
+            <th>Event Date</th>
+            <th>Venue Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const eventData = [
+    {
+        "EventType": "Conference",
+        "eventName": "CS Lecture: AI & Ethics",
+        "eventDate": "2025-05-01",
+        "venueName": "Dinand Library Conference Room"
+    },
+    {
+        "EventType": "Festival",
+        "eventName": "HC Spring Weekend Fest",
+        "eventDate": "2025-04-26",
+        "venueName": "Freshman Field"
+    },
+    {
+        "EventType": "Sports",
+        "eventName": "Football Homecoming Game",
+        "eventDate": "2025-10-05",
+        "venueName": "Fitton Field"
+    },
+    {
+        "EventType": "Sports",
+        "eventName": "HC Hockey vs BU",
+        "eventDate": "2025-11-15",
+        "venueName": "Hart Center Arena"
+    },
+    {
+        "EventType": "Theater",
+        "eventName": "Spring Musical: Rent",
+        "eventDate": "2025-04-28",
+        "venueName": "Linda Johnson Smith Theater"
+    }
+];
+
+// Insert rows into table
+let tableBody = '';
+eventData.forEach(event => {
+    tableBody += `<tr>
+        <td>${event.EventType}</td>
+        <td>${event.eventName}</td>
+        <td>${event.eventDate}</td>
+        <td>${event.venueName}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#eventsTable tbody').innerHTML = tableBody;
+    $('#eventsTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

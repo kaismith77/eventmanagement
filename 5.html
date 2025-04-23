@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Revenue</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Page Title -->
+<h1>Event Revenue</h1>
+
+<!-- Table -->
+<table id="revenueTable" class="display">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Total Revenue ($)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const revenueData = [
+    {
+        "eventName": "Football Homecoming Game",
+        "TotalRevenue": 300.00
+    },
+    {
+        "eventName": "HC Hockey vs BU",
+        "TotalRevenue": 285.00
+    },
+    {
+        "eventName": "Spring Musical: Rent",
+        "TotalRevenue": 216.00
+    },
+    {
+        "eventName": "HC Spring Weekend Fest",
+        "TotalRevenue": 160.00
+    },
+    {
+        "eventName": "Keynote: Dr. Cornel West",
+        "TotalRevenue": 0.00
+    },
+    {
+        "eventName": "CS Lecture: AI & Ethics",
+        "TotalRevenue": 0.00
+    }
+];
+
+// Insert rows into the table
+let tableBody = '';
+revenueData.forEach(event => {
+    tableBody += `<tr>
+        <td>${event.eventName}</td>
+        <td>$${event.TotalRevenue.toFixed(2)}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#revenueTable tbody').innerHTML = tableBody;
+    $('#revenueTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

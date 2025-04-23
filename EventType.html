@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Types</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<a href="erd.html" class="back-link">Back to ERD</a>
+<h1>Event Types</h1>
+
+<table id="eventTypesTable" class="display">
+    <thead>
+        <tr>
+            <th>Event Type ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody id="eventTypesBody">
+        <!-- Data rows will be injected here -->
+    </tbody>
+</table>
+
+<!-- Embedded Data -->
+<script>
+const eventTypes = [
+    { "eventTypeID": "ET001", "name": "Concert", "description": "Live music performance", "isActive": 1 },
+    { "eventTypeID": "ET002", "name": "Sports", "description": "Basketball, Football, Hockey, Soccer, etc.", "isActive": 1 },
+    { "eventTypeID": "ET003", "name": "Comedy", "description": "Stand-up or sketch comedy shows", "isActive": 1 },
+    { "eventTypeID": "ET004", "name": "Theater", "description": "Stage performances and plays", "isActive": 1 },
+    { "eventTypeID": "ET005", "name": "Conference", "description": "Academic and speaker events", "isActive": 1 },
+    { "eventTypeID": "ET006", "name": "Festival", "description": "Cultural, seasonal, or multi-day celebrations", "isActive": 1 }
+];
+</script>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function () {
+    const tbody = $('#eventTypesBody');
+    eventTypes.forEach(type => {
+        const activeText = type.isActive ? 'Yes' : 'No';
+        const row = `
+            <tr>
+                <td>${type.eventTypeID}</td>
+                <td>${type.name}</td>
+                <td>${type.description}</td>
+                <td>${activeText}</td>
+            </tr>`;
+        tbody.append(row);
+    });
+    $('#eventTypesTable').DataTable();
+});
+</script>
+
+</body>
+</html>

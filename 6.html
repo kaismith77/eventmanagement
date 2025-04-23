@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attendance Demographic Analysis</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Page Title -->
+<h1>Attendance Demographic Analysis</h1>
+
+<!-- Table -->
+<table id="attendanceTable" class="display">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Average Age</th>
+            <th>State</th>
+            <th>Total Attendees</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const demographicData = [
+    {
+        "eventName": "HC Hockey vs BU",
+        "AvgAge": 23.6500,
+        "state": "MA",
+        "TotalAttendees": 20
+    },
+    {
+        "eventName": "Football Homecoming Game",
+        "AvgAge": 23.3750,
+        "state": "MA",
+        "TotalAttendees": 16
+    },
+    {
+        "eventName": "Spring Musical: Rent",
+        "AvgAge": 23.4211,
+        "state": "MA",
+        "TotalAttendees": 19
+    },
+    {
+        "eventName": "Keynote: Dr. Cornel West",
+        "AvgAge": 23.9000,
+        "state": "MA",
+        "TotalAttendees": 20
+    },
+    {
+        "eventName": "CS Lecture: AI & Ethics",
+        "AvgAge": 23.4211,
+        "state": "MA",
+        "TotalAttendees": 19
+    },
+    {
+        "eventName": "HC Spring Weekend Fest",
+        "AvgAge": 23.7647,
+        "state": "MA",
+        "TotalAttendees": 17
+    }
+];
+
+// Insert rows into the table
+let tableBody = '';
+demographicData.forEach(event => {
+    tableBody += `<tr>
+        <td>${event.eventName}</td>
+        <td>${event.AvgAge.toFixed(2)}</td>
+        <td>${event.state}</td>
+        <td>${event.TotalAttendees}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#attendanceTable tbody').innerHTML = tableBody;
+    $('#attendanceTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

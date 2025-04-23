@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Attendance</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Page Title -->
+<h1>User Attendance</h1>
+
+<!-- Table -->
+<table id="userAttendanceTable" class="display">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Event Name</th>
+            <th>Purchase Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const userAttendance = [
+    {
+        "userID": "U000001",
+        "name": "Alice Chen",
+        "eventName": "HC Hockey vs BU",
+        "purchaseDate": "2025-03-01 12:00:00"
+    },
+    {
+        "userID": "U000002",
+        "name": "Bob Smith",
+        "eventName": "HC Hockey vs BU",
+        "purchaseDate": "2025-03-07 15:00:00"
+    },
+    {
+        "userID" : "U000003",
+        "name" : "Carla Lopez",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-03-08 15:30:00"
+    },
+    {
+        "userID" : "U000005",
+        "name" : "Elena Rossi",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-04-05 10:00:00"
+    },
+    {
+        "userID" : "U000006",
+        "name" : "Frank Zhang",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-04-05 19:00:00"
+    },
+    {
+        "userID" : "U000003",
+        "name" : "Carla Lopez",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-04-07 19:00:00"
+    },
+    {
+        "userID" : "U000004",
+        "name" : "Daniel Wu",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-04-04 20:00:00"
+    },
+    {
+        "userID" : "U000002",
+        "name" : "Bob Smith",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-04-24 19:00:00"
+    },
+    {
+        "userID" : "U000006",
+        "name" : "Frank Zhang",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-03-31 11:00:00"
+    },
+    {
+        "userID" : "U000006",
+        "name" : "Frank Zhang",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-04-02 19:00:00"
+    },
+    {
+        "userID" : "U000003",
+        "name" : "Carla Lopez",
+        "eventName" : "HC Hockey vs BU",
+        "purchaseDate" : "2025-04-10 11:00:00"
+    },
+{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-03-01 12:00:00"
+	},
+	{
+		"userID" : "U000007",
+		"name" : "Grace Lee",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-04-01 12:00:00"
+	},
+	{
+		"userID" : "U000013",
+		"name" : "Test User 13",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-04-07 18:00:00"
+	},
+	{
+		"userID" : "U000019",
+		"name" : "Test User 19",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-04-13 16:00:00"
+	},
+	{
+		"userID" : "U000025",
+		"name" : "Test User 25",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-04-19 14:00:00"
+	},
+	{
+		"userID" : "U000028",
+		"name" : "Test User 28",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-03-14 15:00:00"
+	},
+	{
+		"userID" : "U000011",
+		"name" : "Test User 11",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-03-17 15:00:00"
+	},
+	{
+		"userID" : "U000010",
+		"name" : "James Thompson",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-03-19 15:00:00"
+	},
+	{
+		"userID" : "U000027",
+		"name" : "Test User 27",
+		"eventName" : "HC Hockey vs BU",
+		"purchaseDate" : "2025-03-22 15:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-02 12:30:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-27 15:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-04-01 12:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-12 18:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-04-21 18:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-12 16:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-04-14 16:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-02 12:30:00"
+	},
+	{
+		"userID" : "U000008",
+		"name" : "Henry Patel",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-04-02 13:00:00"
+	},
+	{
+		"userID" : "U000014",
+		"name" : "Test User 14",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-04-08 19:00:00"
+	},
+	{
+		"userID" : "U000020",
+		"name" : "Test User 20",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-04-14 17:00:00"
+	},
+	{
+		"userID" : "U000026",
+		"name" : "Test User 26",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-04-20 15:00:00"
+	},
+	{
+		"userID" : "U000055",
+		"name" : "Test User 55",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-10 15:00:00"
+	},
+	{
+		"userID" : "U000027",
+		"name" : "Test User 27",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-18 15:00:00"
+	},
+	{
+		"userID" : "U000041",
+		"name" : "Test User 41",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-24 15:00:00"
+	},
+	{
+		"userID" : "U000015",
+		"name" : "Test User 15",
+		"eventName" : "Football Homecoming Game",
+		"purchaseDate" : "2025-03-30 15:00:00"
+	},
+	{
+		"userID" : "U000003",
+		"name" : "Carla Lopez",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-03 13:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-26 11:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-12 16:00:00"
+	},
+	{
+		"userID" : "U000006",
+		"name" : "Frank Zhang",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-21 12:00:00"
+	},
+	{
+		"userID" : "U000003",
+		"name" : "Carla Lopez",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-04-08 19:00:00"
+	},
+	{
+		"userID" : "U000003",
+		"name" : "Carla Lopez",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-20 17:00:00"
+	},
+	{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-04-02 14:00:00"
+	},
+	{
+		"userID" : "U000003",
+		"name" : "Carla Lopez",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-20 13:00:00"
+	},
+	{
+		"userID" : "U000006",
+		"name" : "Frank Zhang",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-04-04 19:00:00"
+	},
+	{
+		"userID" : "U000005",
+		"name" : "Elena Rossi",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-04-13 12:00:00"
+	},
+	{
+		"userID" : "U000003",
+		"name" : "Carla Lopez",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-03 13:00:00"
+	},
+	{
+		"userID" : "U000009",
+		"name" : "Isabel Kim",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-04-03 14:00:00"
+	},
+	{
+		"userID" : "U000015",
+		"name" : "Test User 15",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-04-09 12:00:00"
+	},
+	{
+		"userID" : "U000021",
+		"name" : "Test User 21",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-04-15 18:00:00"
+	},
+	{
+		"userID" : "U000052",
+		"name" : "Test User 52",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-08 15:00:00"
+	},
+	{
+		"userID" : "U000052",
+		"name" : "Test User 52",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-11 15:00:00"
+	},
+	{
+		"userID" : "U000045",
+		"name" : "Test User 45",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-23 15:00:00"
+	},
+	{
+		"userID" : "U000054",
+		"name" : "Test User 54",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-25 15:00:00"
+	},
+	{
+		"userID" : "U000015",
+		"name" : "Test User 15",
+		"eventName" : "Spring Musical: Rent",
+		"purchaseDate" : "2025-03-31 15:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-04 13:30:00"
+	},
+	{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-20 14:00:00"
+	},
+	{
+		"userID" : "U000005",
+		"name" : "Elena Rossi",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-24 20:00:00"
+	},
+	{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-19 20:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-25 19:00:00"
+	},
+	{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-23 19:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-16 12:00:00"
+	},
+	{
+		"userID" : "U000006",
+		"name" : "Frank Zhang",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-30 10:00:00"
+	},
+	{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-28 13:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-17 11:00:00"
+	},
+	{
+		"userID" : "U000003",
+		"name" : "Carla Lopez",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-21 18:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-22 11:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-22 10:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-04 13:30:00"
+	},
+	{
+		"userID" : "U000010",
+		"name" : "James Thompson",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-04 15:00:00"
+	},
+	{
+		"userID" : "U000016",
+		"name" : "Test User 16",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-10 13:00:00"
+	},
+	{
+		"userID" : "U000022",
+		"name" : "Test User 22",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-04-16 19:00:00"
+	},
+	{
+		"userID" : "U000059",
+		"name" : "Test User 59",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-20 15:00:00"
+	},
+	{
+		"userID" : "U000016",
+		"name" : "Test User 16",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-21 15:00:00"
+	},
+	{
+		"userID" : "U000024",
+		"name" : "Test User 24",
+		"eventName" : "Keynote: Dr. Cornel West",
+		"purchaseDate" : "2025-03-28 15:00:00"
+	},
+	{
+		"userID" : "U000005",
+		"name" : "Elena Rossi",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-05 14:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-06 11:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-19 17:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-20 17:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-19 19:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-11 11:00:00"
+	},
+	{
+		"userID" : "U000002",
+		"name" : "Bob Smith",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-12 20:00:00"
+	},
+	{
+		"userID" : "U000005",
+		"name" : "Elena Rossi",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-04 13:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-01 12:00:00"
+	},
+	{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-25 13:00:00"
+	},
+	{
+		"userID" : "U000005",
+		"name" : "Elena Rossi",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-05 14:00:00"
+	},
+	{
+		"userID" : "U000011",
+		"name" : "Test User 11",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-05 16:00:00"
+	},
+	{
+		"userID" : "U000017",
+		"name" : "Test User 17",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-11 14:00:00"
+	},
+	{
+		"userID" : "U000023",
+		"name" : "Test User 23",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-04-17 12:00:00"
+	},
+	{
+		"userID" : "U000053",
+		"name" : "Test User 53",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-09 15:00:00"
+	},
+	{
+		"userID" : "U000040",
+		"name" : "Test User 40",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-12 15:00:00"
+	},
+	{
+		"userID" : "U000041",
+		"name" : "Test User 41",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-16 15:00:00"
+	},
+	{
+		"userID" : "U000029",
+		"name" : "Test User 29",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-26 15:00:00"
+	},
+	{
+		"userID" : "U000060",
+		"name" : "Test User 60",
+		"eventName" : "CS Lecture: AI & Ethics",
+		"purchaseDate" : "2025-03-27 15:00:00"
+	},
+	{
+		"userID" : "U000006",
+		"name" : "Frank Zhang",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-06 14:30:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-14 19:00:00"
+	},
+	{
+		"userID" : "U000005",
+		"name" : "Elena Rossi",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-04-24 17:00:00"
+	},
+	{
+		"userID" : "U000006",
+		"name" : "Frank Zhang",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-17 11:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-16 20:00:00"
+	},
+	{
+		"userID" : "U000001",
+		"name" : "Alice Chen",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-04-12 13:00:00"
+	},
+	{
+		"userID" : "U000006",
+		"name" : "Frank Zhang",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-04-09 12:00:00"
+	},
+	{
+		"userID" : "U000003",
+		"name" : "Carla Lopez",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-28 15:00:00"
+	},
+	{
+		"userID" : "U000004",
+		"name" : "Daniel Wu",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-27 18:00:00"
+	},
+	{
+		"userID" : "U000006",
+		"name" : "Frank Zhang",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-06 14:30:00"
+	},
+	{
+		"userID" : "U000012",
+		"name" : "Test User 12",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-04-06 17:00:00"
+	},
+	{
+		"userID" : "U000018",
+		"name" : "Test User 18",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-04-12 15:00:00"
+	},
+	{
+		"userID" : "U000024",
+		"name" : "Test User 24",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-04-18 13:00:00"
+	},
+	{
+		"userID" : "U000055",
+		"name" : "Test User 55",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-07 15:00:00"
+	},
+	{
+		"userID" : "U000031",
+		"name" : "Test User 31",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-13 15:00:00"
+	},
+	{
+		"userID" : "U000036",
+		"name" : "Test User 36",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-15 15:00:00"
+	},
+	{
+		"userID" : "U000028",
+		"name" : "Test User 28",
+		"eventName" : "HC Spring Weekend Fest",
+		"purchaseDate" : "2025-03-29 15:00:00"
+	}
+
+    // Add the rest of your data here...
+];
+
+// Function to populate the table
+$(document).ready(function() {
+    // Insert rows from the userAttendance data
+    userAttendance.forEach(function(entry) {
+        $('#userAttendanceTable tbody').append(
+            `<tr>
+                <td>${entry.userID}</td>
+                <td>${entry.name}</td>
+                <td>${entry.eventName}</td>
+                <td>${entry.purchaseDate}</td>
+            </tr>`
+        );
+    });
+
+    // Initialize DataTable
+    $('#userAttendanceTable').DataTable();
+});
+</script>
+
+</body>
+</html>

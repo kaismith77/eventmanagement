@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Events</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        table {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <a href="erd.html" class="back-link">Back to ERD</a>
+<h1>Events</h1>
+<table id="eventsTable" class="display">
+    <thead>
+        <tr>
+            <th>Event ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Venue ID</th>
+            <th>Ticket Price</th>
+            <th>Event Type ID</th>
+            <th>Age Restriction</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>E001</td>
+            <td>HC Hockey vs BU</td>
+            <td>Men's Hockey Game vs. Boston University</td>
+            <td>2025-11-15</td>
+            <td>19:00</td>
+            <td>V001</td>
+            <td>$15.00</td>
+            <td>ET002</td>
+            <td>10+</td>
+        </tr>
+        <tr>
+            <td>E002</td>
+            <td>Football Homecoming Game</td>
+            <td>Holy Cross vs. Fordham - Homecoming 2025</td>
+            <td>2025-10-05</td>
+            <td>13:00</td>
+            <td>V002</td>
+            <td>$20.00</td>
+            <td>ET002</td>
+            <td>10+</td>
+        </tr>
+        <tr>
+            <td>E003</td>
+            <td>Spring Musical: Rent</td>
+            <td>HC Theatre Department presents Rent</td>
+            <td>2025-04-28</td>
+            <td>19:00</td>
+            <td>V003</td>
+            <td>$12.00</td>
+            <td>ET004</td>
+            <td>13+</td>
+        </tr>
+        <tr>
+            <td>E004</td>
+            <td>Keynote: Dr. Cornel West</td>
+            <td>Renowned philosopher Dr. West speaks on justice</td>
+            <td>2025-04-20</td>
+            <td>16:00</td>
+            <td>V004</td>
+            <td>$0.00</td>
+            <td>ET005</td>
+            <td>13+</td>
+        </tr>
+        <tr>
+            <td>E005</td>
+            <td>CS Lecture: AI & Ethics</td>
+            <td>Student-organized speaker series on AI Ethics</td>
+            <td>2025-05-01</td>
+            <td>18:00</td>
+            <td>V005</td>
+            <td>$0.00</td>
+            <td>ET005</td>
+            <td>16+</td>
+        </tr>
+        <tr>
+            <td>E006</td>
+            <td>HC Spring Weekend Fest</td>
+            <td>Live music, games, and food on Freshman Field</td>
+            <td>2025-04-26</td>
+            <td>14:00</td>
+            <td>V006</td>
+            <td>$10.00</td>
+            <td>ET006</td>
+            <td>13+</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#eventsTable').DataTable();
+    });
+</script>
+</body>
+</html>

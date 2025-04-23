@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket Assignment</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <a href="erd.html" class="back-link">Back to ERD</a>
+<h1>Ticket Assignment</h1>
+
+<table id="assignmentsTable" class="display">
+    <thead>
+        <tr>
+            <th>Assignment ID</th>
+            <th>Event ID</th>
+            <th>User ID</th>
+            <th>Seat Number</th>
+            <th>Purchase Date</th>
+            <th>Ticket Status</th>
+            <th>Price Paid</th>
+        </tr>
+    </thead>
+    <tbody id="assignmentBody">
+        <!-- Rows will be inserted here -->
+    </tbody>
+</table>
+
+<script>
+// New ticket assignment data
+const assignments = [
+	{
+		"assignmentID" : "A001",
+		"eventID" : "E001",
+		"userID" : "U000001",
+		"seatNumber" : "A01",
+		"purchaseDate" : "2025-03-01 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A002",
+		"eventID" : "E002",
+		"userID" : "U000002",
+		"seatNumber" : "B01",
+		"purchaseDate" : "2025-03-02 12:30:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A003",
+		"eventID" : "E003",
+		"userID" : "U000003",
+		"seatNumber" : "C01",
+		"purchaseDate" : "2025-03-03 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A004",
+		"eventID" : "E004",
+		"userID" : "U000004",
+		"seatNumber" : "D01",
+		"purchaseDate" : "2025-03-04 13:30:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A005",
+		"eventID" : "E005",
+		"userID" : "U000005",
+		"seatNumber" : "E01",
+		"purchaseDate" : "2025-03-05 14:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A006",
+		"eventID" : "E006",
+		"userID" : "U000006",
+		"seatNumber" : "F01",
+		"purchaseDate" : "2025-03-06 14:30:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A007",
+		"eventID" : "E001",
+		"userID" : "U000002",
+		"seatNumber" : "A02",
+		"purchaseDate" : "2025-03-07 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A008",
+		"eventID" : "E001",
+		"userID" : "U000003",
+		"seatNumber" : "A03",
+		"purchaseDate" : "2025-03-08 15:30:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A009",
+		"eventID" : "E005",
+		"userID" : "U000002",
+		"seatNumber" : "J09",
+		"purchaseDate" : "2025-04-06 11:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A010",
+		"eventID" : "E004",
+		"userID" : "U000001",
+		"seatNumber" : "K10",
+		"purchaseDate" : "2025-03-20 14:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A011",
+		"eventID" : "E006",
+		"userID" : "U000004",
+		"seatNumber" : "L11",
+		"purchaseDate" : "2025-03-14 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A012",
+		"eventID" : "E002",
+		"userID" : "U000004",
+		"seatNumber" : "M12",
+		"purchaseDate" : "2025-03-27 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A013",
+		"eventID" : "E004",
+		"userID" : "U000005",
+		"seatNumber" : "N13",
+		"purchaseDate" : "2025-03-24 20:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A014",
+		"eventID" : "E006",
+		"userID" : "U000005",
+		"seatNumber" : "O14",
+		"purchaseDate" : "2025-04-24 17:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A015",
+		"eventID" : "E002",
+		"userID" : "U000004",
+		"seatNumber" : "P15",
+		"purchaseDate" : "2025-04-01 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A016",
+		"eventID" : "E003",
+		"userID" : "U000002",
+		"seatNumber" : "Q16",
+		"purchaseDate" : "2025-03-26 11:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A017",
+		"eventID" : "E001",
+		"userID" : "U000005",
+		"seatNumber" : "R17",
+		"purchaseDate" : "2025-04-05 10:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A018",
+		"eventID" : "E004",
+		"userID" : "U000001",
+		"seatNumber" : "S18",
+		"purchaseDate" : "2025-04-19 20:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A019",
+		"eventID" : "E005",
+		"userID" : "U000002",
+		"seatNumber" : "T19",
+		"purchaseDate" : "2025-04-19 17:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A020",
+		"eventID" : "E003",
+		"userID" : "U000002",
+		"seatNumber" : "U20",
+		"purchaseDate" : "2025-03-12 16:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A021",
+		"eventID" : "E005",
+		"userID" : "U000004",
+		"seatNumber" : "V21",
+		"purchaseDate" : "2025-03-20 17:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A022",
+		"eventID" : "E006",
+		"userID" : "U000006",
+		"seatNumber" : "W22",
+		"purchaseDate" : "2025-03-17 11:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A023",
+		"eventID" : "E001",
+		"userID" : "U000006",
+		"seatNumber" : "X23",
+		"purchaseDate" : "2025-04-05 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A024",
+		"eventID" : "E002",
+		"userID" : "U000004",
+		"seatNumber" : "Y24",
+		"purchaseDate" : "2025-03-12 18:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A025",
+		"eventID" : "E003",
+		"userID" : "U000006",
+		"seatNumber" : "Z25",
+		"purchaseDate" : "2025-03-21 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A026",
+		"eventID" : "E003",
+		"userID" : "U000003",
+		"seatNumber" : "A26",
+		"purchaseDate" : "2025-04-08 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A027",
+		"eventID" : "E005",
+		"userID" : "U000004",
+		"seatNumber" : "B27",
+		"purchaseDate" : "2025-04-19 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A028",
+		"eventID" : "E004",
+		"userID" : "U000002",
+		"seatNumber" : "C28",
+		"purchaseDate" : "2025-03-25 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A029",
+		"eventID" : "E005",
+		"userID" : "U000004",
+		"seatNumber" : "D29",
+		"purchaseDate" : "2025-04-11 11:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A030",
+		"eventID" : "E005",
+		"userID" : "U000002",
+		"seatNumber" : "E30",
+		"purchaseDate" : "2025-03-12 20:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A031",
+		"eventID" : "E003",
+		"userID" : "U000003",
+		"seatNumber" : "F31",
+		"purchaseDate" : "2025-03-20 17:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A032",
+		"eventID" : "E004",
+		"userID" : "U000001",
+		"seatNumber" : "G32",
+		"purchaseDate" : "2025-04-23 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A033",
+		"eventID" : "E005",
+		"userID" : "U000005",
+		"seatNumber" : "H33",
+		"purchaseDate" : "2025-04-04 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A034",
+		"eventID" : "E004",
+		"userID" : "U000002",
+		"seatNumber" : "I34",
+		"purchaseDate" : "2025-04-16 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A035",
+		"eventID" : "E005",
+		"userID" : "U000004",
+		"seatNumber" : "J35",
+		"purchaseDate" : "2025-04-01 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A036",
+		"eventID" : "E006",
+		"userID" : "U000004",
+		"seatNumber" : "K36",
+		"purchaseDate" : "2025-03-16 20:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A037",
+		"eventID" : "E004",
+		"userID" : "U000006",
+		"seatNumber" : "L37",
+		"purchaseDate" : "2025-03-30 10:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A038",
+		"eventID" : "E003",
+		"userID" : "U000001",
+		"seatNumber" : "M38",
+		"purchaseDate" : "2025-04-02 14:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A039",
+		"eventID" : "E001",
+		"userID" : "U000003",
+		"seatNumber" : "N39",
+		"purchaseDate" : "2025-04-07 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A040",
+		"eventID" : "E006",
+		"userID" : "U000001",
+		"seatNumber" : "O40",
+		"purchaseDate" : "2025-04-12 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A041",
+		"eventID" : "E002",
+		"userID" : "U000004",
+		"seatNumber" : "P41",
+		"purchaseDate" : "2025-04-21 18:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A042",
+		"eventID" : "E001",
+		"userID" : "U000004",
+		"seatNumber" : "Q42",
+		"purchaseDate" : "2025-04-04 20:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A043",
+		"eventID" : "E004",
+		"userID" : "U000001",
+		"seatNumber" : "R43",
+		"purchaseDate" : "2025-03-28 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A044",
+		"eventID" : "E003",
+		"userID" : "U000003",
+		"seatNumber" : "S44",
+		"purchaseDate" : "2025-03-20 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A045",
+		"eventID" : "E001",
+		"userID" : "U000002",
+		"seatNumber" : "T45",
+		"purchaseDate" : "2025-04-24 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A046",
+		"eventID" : "E003",
+		"userID" : "U000006",
+		"seatNumber" : "U46",
+		"purchaseDate" : "2025-04-04 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A047",
+		"eventID" : "E001",
+		"userID" : "U000006",
+		"seatNumber" : "V47",
+		"purchaseDate" : "2025-03-31 11:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A048",
+		"eventID" : "E006",
+		"userID" : "U000006",
+		"seatNumber" : "W48",
+		"purchaseDate" : "2025-04-09 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A049",
+		"eventID" : "E004",
+		"userID" : "U000004",
+		"seatNumber" : "X49",
+		"purchaseDate" : "2025-04-17 11:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A050",
+		"eventID" : "E002",
+		"userID" : "U000002",
+		"seatNumber" : "Y50",
+		"purchaseDate" : "2025-03-12 16:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A051",
+		"eventID" : "E002",
+		"userID" : "U000004",
+		"seatNumber" : "Z51",
+		"purchaseDate" : "2025-04-14 16:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A052",
+		"eventID" : "E006",
+		"userID" : "U000003",
+		"seatNumber" : "A52",
+		"purchaseDate" : "2025-03-28 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A053",
+		"eventID" : "E001",
+		"userID" : "U000006",
+		"seatNumber" : "B53",
+		"purchaseDate" : "2025-04-02 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A054",
+		"eventID" : "E004",
+		"userID" : "U000003",
+		"seatNumber" : "C54",
+		"purchaseDate" : "2025-03-21 18:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A055",
+		"eventID" : "E004",
+		"userID" : "U000002",
+		"seatNumber" : "D55",
+		"purchaseDate" : "2025-04-22 11:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A056",
+		"eventID" : "E006",
+		"userID" : "U000004",
+		"seatNumber" : "E56",
+		"purchaseDate" : "2025-03-27 18:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A057",
+		"eventID" : "E003",
+		"userID" : "U000005",
+		"seatNumber" : "F57",
+		"purchaseDate" : "2025-04-13 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A058",
+		"eventID" : "E004",
+		"userID" : "U000002",
+		"seatNumber" : "G58",
+		"purchaseDate" : "2025-04-22 10:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A059",
+		"eventID" : "E001",
+		"userID" : "U000003",
+		"seatNumber" : "H59",
+		"purchaseDate" : "2025-04-10 11:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A060",
+		"eventID" : "E005",
+		"userID" : "U000001",
+		"seatNumber" : "I60",
+		"purchaseDate" : "2025-03-25 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A061",
+		"eventID" : "E001",
+		"userID" : "U000001",
+		"seatNumber" : "A61",
+		"purchaseDate" : "2025-03-01 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A062",
+		"eventID" : "E002",
+		"userID" : "U000002",
+		"seatNumber" : "B61",
+		"purchaseDate" : "2025-03-02 12:30:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A063",
+		"eventID" : "E003",
+		"userID" : "U000003",
+		"seatNumber" : "C61",
+		"purchaseDate" : "2025-03-03 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A064",
+		"eventID" : "E004",
+		"userID" : "U000004",
+		"seatNumber" : "D61",
+		"purchaseDate" : "2025-03-04 13:30:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A065",
+		"eventID" : "E005",
+		"userID" : "U000005",
+		"seatNumber" : "E61",
+		"purchaseDate" : "2025-03-05 14:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A066",
+		"eventID" : "E006",
+		"userID" : "U000006",
+		"seatNumber" : "F61",
+		"purchaseDate" : "2025-03-06 14:30:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A067",
+		"eventID" : "E001",
+		"userID" : "U000007",
+		"seatNumber" : "A67",
+		"purchaseDate" : "2025-04-01 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A068",
+		"eventID" : "E002",
+		"userID" : "U000008",
+		"seatNumber" : "B68",
+		"purchaseDate" : "2025-04-02 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A069",
+		"eventID" : "E003",
+		"userID" : "U000009",
+		"seatNumber" : "C69",
+		"purchaseDate" : "2025-04-03 14:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A070",
+		"eventID" : "E004",
+		"userID" : "U000010",
+		"seatNumber" : "D70",
+		"purchaseDate" : "2025-04-04 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A071",
+		"eventID" : "E005",
+		"userID" : "U000011",
+		"seatNumber" : "E71",
+		"purchaseDate" : "2025-04-05 16:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A072",
+		"eventID" : "E006",
+		"userID" : "U000012",
+		"seatNumber" : "F72",
+		"purchaseDate" : "2025-04-06 17:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A073",
+		"eventID" : "E001",
+		"userID" : "U000013",
+		"seatNumber" : "G73",
+		"purchaseDate" : "2025-04-07 18:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A074",
+		"eventID" : "E002",
+		"userID" : "U000014",
+		"seatNumber" : "H74",
+		"purchaseDate" : "2025-04-08 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A075",
+		"eventID" : "E003",
+		"userID" : "U000015",
+		"seatNumber" : "I75",
+		"purchaseDate" : "2025-04-09 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A076",
+		"eventID" : "E004",
+		"userID" : "U000016",
+		"seatNumber" : "J76",
+		"purchaseDate" : "2025-04-10 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A077",
+		"eventID" : "E005",
+		"userID" : "U000017",
+		"seatNumber" : "K77",
+		"purchaseDate" : "2025-04-11 14:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A078",
+		"eventID" : "E006",
+		"userID" : "U000018",
+		"seatNumber" : "L78",
+		"purchaseDate" : "2025-04-12 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A079",
+		"eventID" : "E001",
+		"userID" : "U000019",
+		"seatNumber" : "M79",
+		"purchaseDate" : "2025-04-13 16:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A080",
+		"eventID" : "E002",
+		"userID" : "U000020",
+		"seatNumber" : "N80",
+		"purchaseDate" : "2025-04-14 17:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A081",
+		"eventID" : "E003",
+		"userID" : "U000021",
+		"seatNumber" : "O81",
+		"purchaseDate" : "2025-04-15 18:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A082",
+		"eventID" : "E004",
+		"userID" : "U000022",
+		"seatNumber" : "P82",
+		"purchaseDate" : "2025-04-16 19:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A083",
+		"eventID" : "E005",
+		"userID" : "U000023",
+		"seatNumber" : "Q83",
+		"purchaseDate" : "2025-04-17 12:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A084",
+		"eventID" : "E006",
+		"userID" : "U000024",
+		"seatNumber" : "R84",
+		"purchaseDate" : "2025-04-18 13:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A085",
+		"eventID" : "E001",
+		"userID" : "U000025",
+		"seatNumber" : "S85",
+		"purchaseDate" : "2025-04-19 14:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A086",
+		"eventID" : "E002",
+		"userID" : "U000026",
+		"seatNumber" : "T86",
+		"purchaseDate" : "2025-04-20 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A107",
+		"eventID" : "E006",
+		"userID" : "U000055",
+		"seatNumber" : "F08",
+		"purchaseDate" : "2025-03-07 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A108",
+		"eventID" : "E003",
+		"userID" : "U000052",
+		"seatNumber" : "E03",
+		"purchaseDate" : "2025-03-08 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A109",
+		"eventID" : "E005",
+		"userID" : "U000053",
+		"seatNumber" : "A01",
+		"purchaseDate" : "2025-03-09 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A110",
+		"eventID" : "E002",
+		"userID" : "U000055",
+		"seatNumber" : "E07",
+		"purchaseDate" : "2025-03-10 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A111",
+		"eventID" : "E003",
+		"userID" : "U000052",
+		"seatNumber" : "A04",
+		"purchaseDate" : "2025-03-11 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A112",
+		"eventID" : "E005",
+		"userID" : "U000040",
+		"seatNumber" : "A08",
+		"purchaseDate" : "2025-03-12 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A113",
+		"eventID" : "E006",
+		"userID" : "U000031",
+		"seatNumber" : "B14",
+		"purchaseDate" : "2025-03-13 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A114",
+		"eventID" : "E001",
+		"userID" : "U000028",
+		"seatNumber" : "C20",
+		"purchaseDate" : "2025-03-14 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A115",
+		"eventID" : "E006",
+		"userID" : "U000036",
+		"seatNumber" : "E09",
+		"purchaseDate" : "2025-03-15 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A116",
+		"eventID" : "E005",
+		"userID" : "U000041",
+		"seatNumber" : "F07",
+		"purchaseDate" : "2025-03-16 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A117",
+		"eventID" : "E001",
+		"userID" : "U000011",
+		"seatNumber" : "D20",
+		"purchaseDate" : "2025-03-17 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A118",
+		"eventID" : "E002",
+		"userID" : "U000027",
+		"seatNumber" : "B17",
+		"purchaseDate" : "2025-03-18 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A119",
+		"eventID" : "E001",
+		"userID" : "U000010",
+		"seatNumber" : "E04",
+		"purchaseDate" : "2025-03-19 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A120",
+		"eventID" : "E004",
+		"userID" : "U000059",
+		"seatNumber" : "A16",
+		"purchaseDate" : "2025-03-20 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A121",
+		"eventID" : "E004",
+		"userID" : "U000016",
+		"seatNumber" : "D02",
+		"purchaseDate" : "2025-03-21 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A122",
+		"eventID" : "E001",
+		"userID" : "U000027",
+		"seatNumber" : "A13",
+		"purchaseDate" : "2025-03-22 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 15.00
+	},
+	{
+		"assignmentID" : "A123",
+		"eventID" : "E003",
+		"userID" : "U000045",
+		"seatNumber" : "C05",
+		"purchaseDate" : "2025-03-23 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A124",
+		"eventID" : "E002",
+		"userID" : "U000041",
+		"seatNumber" : "A06",
+		"purchaseDate" : "2025-03-24 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A125",
+		"eventID" : "E003",
+		"userID" : "U000054",
+		"seatNumber" : "F12",
+		"purchaseDate" : "2025-03-25 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	},
+	{
+		"assignmentID" : "A126",
+		"eventID" : "E005",
+		"userID" : "U000029",
+		"seatNumber" : "F05",
+		"purchaseDate" : "2025-03-26 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A127",
+		"eventID" : "E005",
+		"userID" : "U000060",
+		"seatNumber" : "A17",
+		"purchaseDate" : "2025-03-27 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A128",
+		"eventID" : "E004",
+		"userID" : "U000024",
+		"seatNumber" : "B19",
+		"purchaseDate" : "2025-03-28 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 0.00
+	},
+	{
+		"assignmentID" : "A129",
+		"eventID" : "E006",
+		"userID" : "U000028",
+		"seatNumber" : "F04",
+		"purchaseDate" : "2025-03-29 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 10.00
+	},
+	{
+		"assignmentID" : "A130",
+		"eventID" : "E002",
+		"userID" : "U000015",
+		"seatNumber" : "E02",
+		"purchaseDate" : "2025-03-30 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 20.00
+	},
+	{
+		"assignmentID" : "A131",
+		"eventID" : "E003",
+		"userID" : "U000015",
+		"seatNumber" : "E05",
+		"purchaseDate" : "2025-03-31 15:00:00",
+		"ticketStatus" : "Confirmed",
+		"pricePaid" : 12.00
+	}
+]
+;
+</script>
+
+<!-- jQuery & DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    const tbody = $('#assignmentBody');
+    assignments.forEach(a => {
+        const row = `
+            <tr>
+                <td>${a.assignmentID}</td>
+                <td>${a.eventID}</td>
+                <td>${a.userID}</td>
+                <td>${a.seatNumber}</td>
+                <td>${a.purchaseDate}</td>
+                <td>${a.ticketStatus}</td>
+                <td>$${a.pricePaid.toFixed(2)}</td>
+            </tr>`;
+        tbody.append(row);
+    });
+    $('#assignmentsTable').DataTable({
+        pageLength: 10,
+        order: [[1, 'asc']]
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Top 5 Highest Grossing Events</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 2rem;
+        background-color: #f4f4f4;
+      }
+      h1 {
+        text-align: center;
+      }
+      .chart-container {
+        width: 80%;
+        max-width: 900px;
+        margin: 2rem auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Top 5 Highest Grossing Events</h1>
+    <div class="chart-container">
+      <canvas id="revenueChart"></canvas>
+    </div>
+
+    <script>
+      const data = [
+        {
+          eventName: "Football Homecoming Game",
+          Revenue: 300.0,
+        },
+        {
+          eventName: "HC Hockey vs BU",
+          Revenue: 285.0,
+        },
+        {
+          eventName: "Spring Musical: Rent",
+          Revenue: 216.0,
+        },
+        {
+          eventName: "HC Spring Weekend Fest",
+          Revenue: 160.0,
+        },
+        {
+          eventName: "Keynote: Dr. Cornel West",
+          Revenue: 0.0,
+        },
+      ];
+
+      const ctx = document.getElementById("revenueChart").getContext("2d");
+      const revenueChart = new Chart(ctx, {
+        type: "bar",
+        data: {
+          labels: data.map((event) => event.eventName),
+          datasets: [
+            {
+              label: "Revenue ($)",
+              data: data.map((event) => event.Revenue),
+              backgroundColor: "rgba(75, 192, 192, 0.6)",
+              borderColor: "rgba(75, 192, 192, 1)",
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: function(value) {
+                  return '$' + value;
+                }
+              }
+            },
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

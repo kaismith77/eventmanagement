@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loyal Users</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Page Title -->
+<h1>Loyal Users</h1>
+
+<!-- Table -->
+<table id="loyalUsersTable" class="display">
+    <thead>
+        <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Venue Name</th>
+            <th>Times Visited</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const loyalUsersData = [
+    {
+        "userID": "U000004",
+        "name": "Daniel Wu",
+        "venueName": "Fitton Field",
+        "TimesVisited": 5
+    },
+    {
+        "userID": "U000003",
+        "name": "Carla Lopez",
+        "venueName": "Linda Johnson Smith Theater",
+        "TimesVisited": 5
+    },
+    {
+        "userID": "U000001",
+        "name": "Alice Chen",
+        "venueName": "Hogan Campus Center",
+        "TimesVisited": 4
+    },
+    {
+        "userID": "U000002",
+        "name": "Bob Smith",
+        "venueName": "Hogan Campus Center",
+        "TimesVisited": 4
+    },
+    {
+        "userID": "U000004",
+        "name": "Daniel Wu",
+        "venueName": "Dinand Library Conference Room",
+        "TimesVisited": 4
+    },
+    {
+        "userID": "U000006",
+        "name": "Frank Zhang",
+        "venueName": "Freshman Field",
+        "TimesVisited": 4
+    }
+];
+
+// Insert rows into the table
+let tableBody = '';
+loyalUsersData.forEach(user => {
+    tableBody += `<tr>
+        <td>${user.userID}</td>
+        <td>${user.name}</td>
+        <td>${user.venueName}</td>
+        <td>${user.TimesVisited}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#loyalUsersTable tbody').innerHTML = tableBody;
+    $('#loyalUsersTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

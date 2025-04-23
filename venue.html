@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Venues</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <a href="erd.html" class="back-link">Back to ERD</a>
+<h1>Venues</h1>
+
+<table id="venuesTable" class="display">
+    <thead>
+        <tr>
+            <th>Venue ID</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Address</th>
+            <th>State</th>
+            <th>Zipcode</th>
+            <th>Capacity</th>
+            <th>Parking</th>
+            <th>Facilities</th>
+        </tr>
+    </thead>
+    <tbody id="venueBody">
+        <!-- Rows will be inserted here -->
+    </tbody>
+</table>
+
+<script>
+// Embedded venue data
+const venues = [
+    {
+        "venueID": "V001",
+        "venueName": "Hart Center Arena",
+        "city": "Worcester",
+        "address": "1 College St",
+        "state": "MA",
+        "zipcode": "01610",
+        "capacity": 3500,
+        "parkingAvailable": 1,
+        "facilities": "Bleacher Seating, Locker Rooms, Concessions"
+    },
+    {
+        "venueID": "V002",
+        "venueName": "Fitton Field",
+        "city": "Worcester",
+        "address": "1 College St",
+        "state": "MA",
+        "zipcode": "01610",
+        "capacity": 23000,
+        "parkingAvailable": 1,
+        "facilities": "Scoreboard, VIP Booths, Locker Rooms"
+    },
+    {
+        "venueID": "V003",
+        "venueName": "Linda Johnson Smith Theater",
+        "city": "Worcester",
+        "address": "1 College St",
+        "state": "MA",
+        "zipcode": "01610",
+        "capacity": 300,
+        "parkingAvailable": 1,
+        "facilities": "Stage, Lighting System, Green Room"
+    },
+    {
+        "venueID": "V004",
+        "venueName": "Hogan Campus Center",
+        "city": "Worcester",
+        "address": "1 College St",
+        "state": "MA",
+        "zipcode": "01610",
+        "capacity": 800,
+        "parkingAvailable": 1,
+        "facilities": "AV Equipment, Catering Area"
+    },
+    {
+        "venueID": "V005",
+        "venueName": "Dinand Library Conference Room",
+        "city": "Worcester",
+        "address": "1 College St",
+        "state": "MA",
+        "zipcode": "01610",
+        "capacity": 50,
+        "parkingAvailable": 1,
+        "facilities": "Projector, Round Tables, Whiteboard"
+    },
+    {
+        "venueID": "V006",
+        "venueName": "Freshman Field",
+        "city": "Worcester",
+        "address": "1 College St",
+        "state": "MA",
+        "zipcode": "01610",
+        "capacity": 1500,
+        "parkingAvailable": 1,
+        "facilities": "Grass Field, Bleachers, Scoreboard"
+    }
+];
+</script>
+
+<!-- jQuery & DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    const tbody = $('#venueBody');
+    venues.forEach(v => {
+        const parking = v.parkingAvailable ? 'Yes' : 'No';
+        const row = `
+            <tr>
+                <td>${v.venueID}</td>
+                <td>${v.venueName}</td>
+                <td>${v.city}</td>
+                <td>${v.address}</td>
+                <td>${v.state}</td>
+                <td>${v.zipcode}</td>
+                <td>${v.capacity}</td>
+                <td>${parking}</td>
+                <td>${v.facilities}</td>
+            </tr>`;
+        tbody.append(row);
+    });
+    $('#venuesTable').DataTable({
+        pageLength: 10,
+        order: [[1, 'asc']]
+    });
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets Sales</title>
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+</head>
+<body>
+
+<!-- Back link -->
+<a href="list-of-reports.html">← Back to List of Reports</a>
+
+<!-- Page Title -->
+<h1>Ticket Sales by Event</h1>
+
+<!-- Table -->
+<table id="ticketsTable" class="display">
+    <thead>
+        <tr>
+            <th>Event Name</th>
+            <th>Tickets Sold</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be inserted by JavaScript -->
+    </tbody>
+</table>
+
+<!-- jQuery and DataTables JS -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+// Embedded JSON data
+const ticketData = [
+    {
+        "eventName": "HC Hockey vs BU",
+        "TicketsSold": 20
+    },
+    {
+        "eventName": "Keynote: Dr. Cornel West",
+        "TicketsSold": 20
+    },
+    {
+        "eventName": "Spring Musical: Rent",
+        "TicketsSold": 19
+    },
+    {
+        "eventName": "CS Lecture: AI & Ethics",
+        "TicketsSold": 19
+    },
+    {
+        "eventName": "HC Spring Weekend Fest",
+        "TicketsSold": 17
+    },
+    {
+        "eventName": "Football Homecoming Game",
+        "TicketsSold": 16
+    }
+];
+
+// Insert rows into the table
+let tableBody = '';
+ticketData.forEach(event => {
+    tableBody += `<tr>
+        <td>${event.eventName}</td>
+        <td>${event.TicketsSold}</td>
+    </tr>`;
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelector('#ticketsTable tbody').innerHTML = tableBody;
+    $('#ticketsTable').DataTable(); // Activate DataTables
+});
+</script>
+
+</body>
+</html>

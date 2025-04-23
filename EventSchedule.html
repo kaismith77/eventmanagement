@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event Schedule</title>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 2rem;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <a href="erd.html" class="back-link">Back to ERD</a>
+<h1>Event Schedule</h1>
+
+<table id="scheduleTable" class="display">
+    <thead>
+        <tr>
+            <th>Schedule ID</th>
+            <th>Event ID</th>
+            <th>Session Name</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Performer</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody id="scheduleBody">
+        <!-- Rows will be inserted here -->
+    </tbody>
+</table>
+
+<script>
+// Embedded schedule data
+const schedules = [
+    {
+        "scheduleID": "SC001",
+        "eventID": "E001",
+        "sessionName": "Opening Ceremony",
+        "startTime": "2025-11-15 18:30:00",
+        "endTime": "2025-11-15 19:00:00",
+        "performerName": "HC Pep Band",
+        "description": "Marching band performance and guest welcome"
+    },
+    {
+        "scheduleID": "SC002",
+        "eventID": "E001",
+        "sessionName": "Main Game",
+        "startTime": "2025-11-15 19:00:00",
+        "endTime": "2025-11-15 21:00:00",
+        "performerName": "Holy Cross Hockey Team",
+        "description": "Men’s Hockey match vs. Boston University"
+    },
+    {
+        "scheduleID": "SC003",
+        "eventID": "E003",
+        "sessionName": "Act I",
+        "startTime": "2025-04-28 19:00:00",
+        "endTime": "2025-04-28 20:00:00",
+        "performerName": "Cast of Rent",
+        "description": "Opening act of the musical"
+    },
+    {
+        "scheduleID": "SC004",
+        "eventID": "E003",
+        "sessionName": "Intermission",
+        "startTime": "2025-04-28 20:00:00",
+        "endTime": "2025-04-28 20:20:00",
+        "performerName": "",
+        "description": "Break for refreshments"
+    },
+    {
+        "scheduleID": "SC005",
+        "eventID": "E003",
+        "sessionName": "Act II",
+        "startTime": "2025-04-28 20:20:00",
+        "endTime": "2025-04-28 21:30:00",
+        "performerName": "Cast of Rent",
+        "description": "Final act of the musical"
+    },
+    {
+        "scheduleID": "SC006",
+        "eventID": "E004",
+        "sessionName": "Lecture Session",
+        "startTime": "2025-04-20 16:00:00",
+        "endTime": "2025-04-20 17:00:00",
+        "performerName": "Dr. Cornel West",
+        "description": "Philosophical discussion on justice and equity"
+    },
+    {
+        "scheduleID": "SC007",
+        "eventID": "E006",
+        "sessionName": "Live Concert",
+        "startTime": "2025-04-26 15:00:00",
+        "endTime": "2025-04-26 17:00:00",
+        "performerName": "Student Bands",
+        "description": "Performance by various student musical groups"
+    },
+    {
+        "scheduleID": "SC008",
+        "eventID": "E002",
+        "sessionName": "Kickoff",
+        "startTime": "2025-10-05 13:00:00",
+        "endTime": "2025-10-05 13:05:00",
+        "performerName": "",
+        "description": "Football game begins with coin toss"
+    }
+];
+</script>
+
+<!-- jQuery & DataTables -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script>
+$(document).ready(function() {
+    const tbody = $('#scheduleBody');
+    schedules.forEach(item => {
+        const performer = item.performerName || '—';
+        const row = `
+            <tr>
+                <td>${item.scheduleID}</td>
+                <td>${item.eventID}</td>
+                <td>${item.sessionName}</td>
+                <td>${item.startTime}</td>
+                <td>${item.endTime}</td>
+                <td>${performer}</td>
+                <td>${item.description}</td>
+            </tr>`;
+        tbody.append(row);
+    });
+    $('#scheduleTable').DataTable({
+        pageLength: 10,
+        order: [[3, 'asc']]  // sort by Start Time
+    });
+});
+</script>
+
+</body>
+</html>
